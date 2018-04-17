@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitSharp", "source\fitSharp\fitSharp.csproj", "{2B85B203-EFB8-4F8D-8900-BC0A617D4ADF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fitSharp", "source\fitSharp\fitSharp.csproj", "{2B85B203-EFB8-4F8D-8900-BC0A617D4ADF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitSharpTest", "source\fitSharpTest\fitSharpTest.csproj", "{7091F316-CD5F-4C49-98F7-091A16781AE2}"
 EndProject
@@ -30,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dbfitTest", "source\dbfitTest\dbfitTest.csproj", "{383E3568-AEEE-4F95-8D87-355D891DB36F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunnerW", "source\RunnerW\RunnerW.csproj", "{73A6C8F9-FB51-4D17-9BED-4BE0785CD5B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunnerD", "source\Runner.Core\RunnerD.csproj", "{E580EAA8-360D-4DD3-A16A-11F895866AA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,8 +95,15 @@ Global
 		{73A6C8F9-FB51-4D17-9BED-4BE0785CD5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73A6C8F9-FB51-4D17-9BED-4BE0785CD5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73A6C8F9-FB51-4D17-9BED-4BE0785CD5B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E580EAA8-360D-4DD3-A16A-11F895866AA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E580EAA8-360D-4DD3-A16A-11F895866AA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E580EAA8-360D-4DD3-A16A-11F895866AA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E580EAA8-360D-4DD3-A16A-11F895866AA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33C246E4-5D0F-4C7E-BDAA-C7F03E2C11B5}
 	EndGlobalSection
 EndGlobal

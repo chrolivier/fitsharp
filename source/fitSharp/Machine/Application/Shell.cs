@@ -38,34 +38,36 @@ namespace fitSharp.Machine.Application {
             return 1;
         }
 
-        int RunInDomain(Memory memory) {
-            return !memory.HasItem<AppDomainSetup>()
-                ? RunInCurrentDomain(memory)
-                : RunInNewDomain(memory.GetItem<AppDomainSetup>());
+        int RunInDomain(Memory memory)
+        {
+            return RunInCurrentDomain(memory);
+//            return !memory.HasItem<AppDomainSetup>()
+//                ? RunInCurrentDomain(memory)
+//                : RunInNewDomain(memory.GetItem<AppDomainSetup>());
         }
         
-        int RunInNewDomain(AppDomainSetup appDomainSetup) {
-            var newDomain = AppDomain.CreateDomain("fitSharp.Machine", null, appDomainSetup);
-            try {
-                var remoteShell = (Shell) newDomain.CreateInstanceAndUnwrap(
-                                              Assembly.GetExecutingAssembly().GetName().Name,
-                                              typeof (Shell).FullName,
-                                              false,
-                                              BindingFlags.CreateInstance | BindingFlags.Instance | BindingFlags.Public,
-                                              null,
-                                              new object[] { progressReporter, arguments },
-                                              null, null);
-                return remoteShell.RunInNewDomain();
-            }
-            finally {
-                // avoid deadlock on Unload
-                new Action<AppDomain>(AppDomain.Unload).BeginInvoke(newDomain, null, null);
-            }
-        }
+//        int RunInNewDomain(AppDomainSetup appDomainSetup) {
+//            var newDomain = AppDomain.CreateDomain("fitSharp.Machine", null, appDomainSetup);
+//            try {
+//                var remoteShell = (Shell) newDomain.CreateInstanceAndUnwrap(
+//                                              Assembly.GetExecutingAssembly().GetName().Name,
+//                                              typeof (Shell).FullName,
+//                                              false,
+//                                              BindingFlags.CreateInstance | BindingFlags.Instance | BindingFlags.Public,
+//                                              null,
+//                                              new object[] { progressReporter, arguments },
+//                                              null, null);
+//                return remoteShell.RunInNewDomain();
+//            }
+//            finally {
+//                // avoid deadlock on Unload
+//                new Action<AppDomain>(AppDomain.Unload).BeginInvoke(newDomain, null, null);
+//            }
+//        }
 
-        int RunInNewDomain() {
-            return arguments.LoadMemory().Select(ReportError, RunInCurrentDomain);
-        }
+//        int RunInNewDomain() {
+//            return arguments.LoadMemory().Select(ReportError, RunInCurrentDomain);
+//        }
 
         int RunInCurrentDomain(Memory memory) {
             Runner = new BasicProcessor().Create(memory.GetItem<Settings>().Runner).GetValue<Runnable>();

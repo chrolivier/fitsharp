@@ -33,7 +33,7 @@ namespace fitSharp.Machine.Application {
             var error = new Error();
 
             var argumentParser = new ArgumentParser();
-            argumentParser.AddArgumentHandler("a", value => memory.GetItem<AppDomainSetup>().ConfigurationFile = value);
+//            argumentParser.AddArgumentHandler("a", value => memory.GetItem<AppDomainSetup>().ConfigurationFile = value);
             argumentParser.AddArgumentHandler("c", value => {
                 if (!textSource.Exists(value)) {
                     error.Add(string.Format("Suite configuration file '{0}' does not exist.", value));
@@ -48,9 +48,9 @@ namespace fitSharp.Machine.Application {
 
             memory.Item<Settings>().Apply(settings => ParseRunner(memory, settings));
 
-            if (error.IsNone) {
-                memory.Item<AppDomainSetup>().Apply(setup => ValidateApplicationBase(setup, error));
-            }
+//            if (error.IsNone) {
+//                memory.Item<AppDomainSetup>().Apply(setup => ValidateApplicationBase(setup, error));
+//            }
 
             if (error.IsNone && string.IsNullOrEmpty(memory.GetItem<Settings>().Runner)) {
                 error.Add("Missing runner class");
@@ -59,14 +59,14 @@ namespace fitSharp.Machine.Application {
             return new Either<Error, Memory>(!error.IsNone, error, memory);
         }
 
-        void ValidateApplicationBase(AppDomainSetup appDomainSetup, Error error) {
-            if (string.IsNullOrEmpty(appDomainSetup.ApplicationBase)) {
-                appDomainSetup.ApplicationBase = AppDomain.CurrentDomain.BaseDirectory;
-            }
-            if (!textSource.Exists(appDomainSetup.ConfigurationFile)) {
-                error.Add(string.Format("Application configuration file '{0}' does not exist.", appDomainSetup.ConfigurationFile));
-            }
-        }
+//        void ValidateApplicationBase(AppDomainSetup appDomainSetup, Error error) {
+//            if (string.IsNullOrEmpty(appDomainSetup.ApplicationBase)) {
+//                appDomainSetup.ApplicationBase = AppDomain.CurrentDomain.BaseDirectory;
+//            }
+//            if (!textSource.Exists(appDomainSetup.ConfigurationFile)) {
+//                error.Add(string.Format("Application configuration file '{0}' does not exist.", appDomainSetup.ConfigurationFile));
+//            }
+//        }
 
         static void ParseRunner(Memory memory, Settings settings) {
             var runner = settings.Runner;

@@ -9,8 +9,10 @@ using fitSharp.Machine.Model;
 namespace fitSharp.Machine.Application {
     public class Settings: Copyable {
         private static readonly string appSettingsBehavior;
-        static Settings() {
-            appSettingsBehavior = ConfigurationManager.AppSettings["fitVersion"];
+        static Settings()
+        {
+            appSettingsBehavior = "";
+//            appSettingsBehavior = ConfigurationManager.AppSettings["fitVersion"];
         }
 
         private const int DefaultCodePage = 1252;
