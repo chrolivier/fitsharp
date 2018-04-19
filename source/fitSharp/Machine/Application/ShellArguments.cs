@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using fitSharp.IO;
 using fitSharp.Machine.Engine;
 using fitSharp.Machine.Model;
@@ -23,7 +24,7 @@ namespace fitSharp.Machine.Application {
 
         public string Usage {
             get {
-                return string.Format("Usage:\n\t{0} [ -r runnerClass ][ -a appConfigFile ][ -c suiteConfigFile ] ...",
+                return string.Format("Usage:\n\t{0} [ -r runnerClass ][ -a appConfigFile ][ -c suiteConfigFile ][ -p pauseSeconds ] ...",
                     Process.GetCurrentProcess().ProcessName);
             }
         }
@@ -44,6 +45,7 @@ namespace fitSharp.Machine.Application {
             });
             argumentParser.AddArgumentHandler("r", value => memory.GetItem<Settings>().Runner = value);
             argumentParser.AddArgumentHandler("f", InitializeAndAddFolders);
+            argumentParser.AddArgumentHandler("p", PauseForDebug);
             argumentParser.Parse(commandLineArguments);
 
             memory.Item<Settings>().Apply(settings => ParseRunner(memory, settings));
@@ -57,6 +59,14 @@ namespace fitSharp.Machine.Application {
             }
 
             return new Either<Error, Memory>(!error.IsNone, error, memory);
+        }
+
+        private void PauseForDebug(string pauseLength)
+        {
+            if (int.TryParse(pauseLength, out var duration))
+            {
+                Thread.Sleep(duration * 1000);
+            }
         }
 
 //        void ValidateApplicationBase(AppDomainSetup appDomainSetup, Error error) {
@@ -90,6 +100,6 @@ namespace fitSharp.Machine.Application {
         readonly TextSource textSource;
         readonly IList<string> commandLineArguments;
 
-        static readonly string[] switches = {"a", "c", "f", "r"};
+        static readonly string[] switches = {"a", "c", "f", "r", "p"};
     }
 }
